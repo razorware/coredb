@@ -7,6 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorWare.CoreDb", "RazorWa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.CoreDb.StorageEngine", "RazorWare.CoreDb.StorageEngine\RazorWare.CoreDb.StorageEngine.csproj", "{551500F1-D42A-40EE-9EB4-484FCA40FC6E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_READMEs", "_READMEs", "{D99C362A-FD27-47D2-A24D-5D3CE22D1D3C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.CoreDb.Fiction", "RazorWare.CoreDb.Fiction\RazorWare.CoreDb.Fiction.csproj", "{C5C7D032-60BF-476C-BE59-2DCB95A594BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fiction Center", "Fiction Center", "{172C869B-B8A7-48DC-B43B-A15192F4BEE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.CoreDb.Fiction.Testing", "RazorWare.CoreDb.Fiction.Tests\RazorWare.CoreDb.Fiction.Testing.csproj", "{A00432DA-04F8-4FD9-8DEE-5811875A6ECD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +32,21 @@ Global
 		{551500F1-D42A-40EE-9EB4-484FCA40FC6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{551500F1-D42A-40EE-9EB4-484FCA40FC6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{551500F1-D42A-40EE-9EB4-484FCA40FC6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5C7D032-60BF-476C-BE59-2DCB95A594BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5C7D032-60BF-476C-BE59-2DCB95A594BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5C7D032-60BF-476C-BE59-2DCB95A594BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5C7D032-60BF-476C-BE59-2DCB95A594BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A00432DA-04F8-4FD9-8DEE-5811875A6ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A00432DA-04F8-4FD9-8DEE-5811875A6ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A00432DA-04F8-4FD9-8DEE-5811875A6ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A00432DA-04F8-4FD9-8DEE-5811875A6ECD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C5C7D032-60BF-476C-BE59-2DCB95A594BE} = {172C869B-B8A7-48DC-B43B-A15192F4BEE4}
+		{A00432DA-04F8-4FD9-8DEE-5811875A6ECD} = {172C869B-B8A7-48DC-B43B-A15192F4BEE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {618DF3BC-B8AD-4B28-AD47-77818DF546A2}

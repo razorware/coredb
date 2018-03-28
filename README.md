@@ -10,3 +10,5 @@ default SQL Server _all in one_ architectures.
 
 Requirements:
 * Some data. Looking into some data generators to create tons of data.
+  Looking into: https://github.com/bchavez/Bogus
+
