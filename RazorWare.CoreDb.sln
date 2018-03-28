@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorWare.CoreDb", "RazorWare.CoreDb\RazorWare.CoreDb.csproj", "{B96E8B3E-033C-4A82-8BE5-A78373F9F412}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.CoreDb.StorageEngine", "RazorWare.CoreDb.StorageEngine\RazorWare.CoreDb.StorageEngine.csproj", "{551500F1-D42A-40EE-9EB4-484FCA40FC6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B96E8B3E-033C-4A82-8BE5-A78373F9F412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96E8B3E-033C-4A82-8BE5-A78373F9F412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B96E8B3E-033C-4A82-8BE5-A78373F9F412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B96E8B3E-033C-4A82-8BE5-A78373F9F412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{551500F1-D42A-40EE-9EB4-484FCA40FC6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{551500F1-D42A-40EE-9EB4-484FCA40FC6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{551500F1-D42A-40EE-9EB4-484FCA40FC6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{551500F1-D42A-40EE-9EB4-484FCA40FC6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {618DF3BC-B8AD-4B28-AD47-77818DF546A2}
+	EndGlobalSection
+EndGlobal
