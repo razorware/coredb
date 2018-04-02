@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_READMEs", "_READMEs", "{D9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.CoreDb.Fiction", "RazorWare.CoreDb.Fiction\RazorWare.CoreDb.Fiction.csproj", "{C5C7D032-60BF-476C-BE59-2DCB95A594BE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fiction Center", "Fiction Center", "{172C869B-B8A7-48DC-B43B-A15192F4BEE4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fiction Data Source", "Fiction Data Source", "{172C869B-B8A7-48DC-B43B-A15192F4BEE4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.CoreDb.Fiction.Testing", "RazorWare.CoreDb.Fiction.Tests\RazorWare.CoreDb.Fiction.Testing.csproj", "{A00432DA-04F8-4FD9-8DEE-5811875A6ECD}"
 EndProject

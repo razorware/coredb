@@ -3,45 +3,35 @@ using System.Linq;
 using System.Collections.Generic;
 
 namespace RazorWare.CoreDb.Fiction {
-   public abstract class DataBinder {
-      private readonly List<Data> dataCollection = new List<Data>();
+   public class DataBinder<TBinder> {
+      private readonly Dictionary<Type, IDataGenerator> generators = new Dictionary<Type, IDataGenerator>();
+
       private readonly string name;
 
       public string Name => name;
-      public IReadOnlyList<Data> Data => dataCollection;
 
-      protected DataBinder(string binderName) {
-         name = binderName;
+      public DataBinder(string binderName = null) {
+         name = binderName ?? typeof(TBinder).Name;
       }
 
-      protected void AddDataType<TData>(TData data) where TData : Data {
-         // can only have one type in collection
-         if (!dataCollection.Any(t => t is TData)) {
-            dataCollection.Add(data);
+      public DataGenerator<TData> AddGenerator<TData>( ) where TData : class {
+         var type = typeof(TData);
+
+         if (!generators.TryGetValue(type, out IDataGenerator generator)) {
+            generators[type] = generator = DataGenerator<TData>.Create();
          }
+
+         return new DataGenerator<TData>((DataGenerator<TData>.IGenerator)generator);
       }
 
-      public IEnumerable<TData> Generate<TData>(int numRecords) where TData : Data {
-         var records = new List<TData>();
+      public TData Generate<TData>( ) where TData : class {
+         var type = typeof(TData);
 
-         if (TryGetDataType(out TData tData)) {
-            while (records.Count <= numRecords) {
-               records.Add(((IDataObject)tData).Generate<TData>());
-            }
+         if (!generators.TryGetValue(type, out IDataGenerator generator)) {
+            return null;
          }
 
-         return records;
-      }
-
-      private bool TryGetDataType<TData>(out TData tData) where TData : Data {
-         tData = null;
-         var data = default(Data);
-
-         if((data = dataCollection.FirstOrDefault(t => t is TData)) != null) {
-            tData = (TData)data;
-         }
-
-         return tData != null;
+         return ((DataGenerator<TData>.IGenerator)generator).Generate();
       }
    }
 }
