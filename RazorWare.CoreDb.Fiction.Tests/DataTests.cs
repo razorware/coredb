@@ -14,6 +14,12 @@ namespace RazorWare.CoreDb.Fiction.Testing {
       private int personId = 0;
       private int addressId = 0;
 
+      [TestInitialize]
+      public void InitializeTest( ) {
+         personId = 0;
+         addressId = 0;
+      }
+
       [TestMethod]
       public void ConstructDataGenerator( ) {
          var personGenerator = DataGenerator<Person>.Create();
@@ -89,9 +95,6 @@ namespace RazorWare.CoreDb.Fiction.Testing {
 
       [TestMethod]
       public void AddGeneratorToBinder( ) {
-         // reset personId
-         personId = 0;
-
          var customers = new DataBinder<Customers>();
          customers.AddGenerator<Person>()
             .RuleFor(o => o.Id, f => personId++)
@@ -110,11 +113,7 @@ namespace RazorWare.CoreDb.Fiction.Testing {
 
       [TestMethod]
       public void AddGeneratorDependencyToBinder( ) {
-         personId = 0;
-         addressId = 0;
-
          var customers = new DataBinder<Customers>();
-
          customers.AddGenerator<Address>()
             .RuleFor(o => o.Id, f => addressId++)
             .RuleFor(o => o.StreetNumber, f => GetStreetNumber(f))
@@ -133,6 +132,11 @@ namespace RazorWare.CoreDb.Fiction.Testing {
          var person = customers.Generate<Person>();
 
          Assert.IsTrue(person.AddressId != -1);
+      }
+
+      [TestMethod]
+      public void CacheBinderData( ) {
+
       }
 
 

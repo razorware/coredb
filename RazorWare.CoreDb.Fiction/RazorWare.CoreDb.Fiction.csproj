@@ -12,4 +12,8 @@
     <PackageReference Include="Bogus" Version="22.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RazorWare.CoreDb\RazorWare.CoreDb.csproj" />
+  </ItemGroup>
+
 </Project>

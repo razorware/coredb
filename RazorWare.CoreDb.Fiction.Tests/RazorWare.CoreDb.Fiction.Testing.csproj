@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RazorWare.CoreDb.Fiction\RazorWare.CoreDb.Fiction.csproj" />
+    <ProjectReference Include="..\RazorWare.CoreDb\RazorWare.CoreDb.csproj" />
   </ItemGroup>
 
 </Project>
