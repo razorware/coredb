@@ -3,8 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using RazorWare.CoreDb.Fiction.DataObjects;
-
+using RazorWare.DbFake.ClientDatabase;
 
 namespace RazorWare.CoreDb.Fiction.Testing {
    [TestClass]

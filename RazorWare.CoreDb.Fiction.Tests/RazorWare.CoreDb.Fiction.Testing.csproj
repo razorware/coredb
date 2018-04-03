@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Samples\**" />
+    <EmbeddedResource Remove="Samples\**" />
+    <None Remove="Samples\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.2" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
@@ -15,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RazorWare.CoreDb.Fiction\RazorWare.CoreDb.Fiction.csproj" />
     <ProjectReference Include="..\RazorWare.CoreDb\RazorWare.CoreDb.csproj" />
+    <ProjectReference Include="..\RazorWare.DbFake.ClientDatabase\RazorWare.DbFake.ClientDatabase.csproj" />
   </ItemGroup>
 
 </Project>
