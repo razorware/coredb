@@ -200,6 +200,46 @@ namespace RazorWare.CoreDb.Fiction.Testing {
          CollectionAssert.AreEqual(expAddresses, repository.All<Address>().ToList());
       }
 
+      [TestMethod]
+      public void CacheUniqueData( ) {
+         var repository = new Repository();
+         repository.AddCache<ZipCode>();
+
+         var customers = new DataBinder(dataRepo: repository, binderName: "Customers");
+         // Unique executes Cache automatically
+         var zipGenerator = customers.AddGenerator<ZipCode>()
+            .RuleFor(o => o.Code, f => GetZipCode(f))
+            .RuleFor(o => o.City, f => f.Address.City())
+            .RuleFor(o => o.State, f => f.Address.StateAbbr())
+            .Unique(repository, z => z.Code);
+
+         // generate until duplicate code is encountered
+         var zipCodes = new Dictionary<int, List<ZipCode>>();
+         var hasDupe = false;
+         var key = -1;
+
+         while (!hasDupe) {
+            var data = zipGenerator();
+            if(zipCodes.TryGetValue(data.Code, out List<ZipCode> cache)) {
+               cache.Add(data);
+               key = data.Code;
+            }
+            else {
+               zipCodes[data.Code] = cache = new List<ZipCode>();
+               cache.Add(data);
+            }
+
+            hasDupe = key != -1;
+         }
+
+         Assert.IsTrue(zipCodes[key].Count == 2);
+
+         var zc0 = zipCodes[key][0];
+         var zc1 = zipCodes[key][1];
+
+         Assert.AreEqual(zc0.City, zc1.City);
+         Assert.AreEqual(zc0.State, zc1.State);
+      }
 
       internal static string GetStreetNumber(Bogus.Faker f) {
          return f.Random.Int(1, 15000).ToString();
@@ -257,6 +297,17 @@ namespace RazorWare.CoreDb.Fiction.Testing {
          }
 
          return null;
+      }
+
+      internal static int GetZipCode(Bogus.Faker f) {
+         var code = f.Address.ZipCode();
+
+         if (code.Contains("-")) {
+            return int.Parse(code.Split('-')[0]);
+         }
+         else {
+            return int.Parse(code);
+         }
       }
 
       internal static Gender GetGender(int gInt) {

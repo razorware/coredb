@@ -23,8 +23,12 @@ namespace RazorWare.CoreDb.Fiction {
          return this;
       }
 
-      public Func<TData> Cache( ) {
+      public Generate<TData> Cache( ) {
          return generator.Binder.Cache(generator.Generate);
+      }
+
+      public TData Generate( ) {
+         return generator.Generate();
       }
 
       public static IGenerator Create(DataBinder dataBinder, string name = null) {

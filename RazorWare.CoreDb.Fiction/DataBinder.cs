@@ -36,7 +36,7 @@ namespace RazorWare.CoreDb.Fiction {
          return ((DataGenerator<TData>.IGenerator)generator).Generate();
       }
 
-      public Func<TData> Cache<TData>(Func<TData> generate) where TData : class {
+      public Generate<TData> Cache<TData>(Func<TData> generate) where TData : class {
          if (repo == null) {
             throw new InvalidOperationException("Cannot cache generator objects without a repository");
          }
