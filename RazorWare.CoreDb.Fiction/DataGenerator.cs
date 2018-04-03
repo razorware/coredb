@@ -23,13 +23,18 @@ namespace RazorWare.CoreDb.Fiction {
          return this;
       }
 
-      public static IGenerator Create(string name = null) {
-         return new Generator(name ?? typeof(TData).Name);
+      public Func<TData> Cache( ) {
+         return generator.Binder.Cache(generator.Generate);
+      }
+
+      public static IGenerator Create(DataBinder dataBinder, string name = null) {
+         return new Generator(dataBinder, name ?? typeof(TData).Name);
       }
 
       public class Generator : IGenerator {
          private readonly string name;
          private readonly Type type;
+         private readonly DataBinder binder;
 
          private IDataFake faker;
          private bool isUnique;
@@ -38,9 +43,11 @@ namespace RazorWare.CoreDb.Fiction {
 
          string IGenerator.Name => name;
          bool IGenerator.IsUnique => isUnique;
+         DataBinder IGenerator.Binder => binder;
 
-         internal Generator(string dataName) {
+         internal Generator(DataBinder dataBinder, string dataName) {
             name = dataName;
+            binder = dataBinder;
          }
 
          public IGenerator RuleFor<TProperty>(Expression<Func<TData, TProperty>> property, Func<Faker, TProperty> setter) {
@@ -102,6 +109,7 @@ namespace RazorWare.CoreDb.Fiction {
       public interface IGenerator : IDataGenerator {
          string Name { get; }
          bool IsUnique { get; }
+         DataBinder Binder { get; }
 
          IGenerator RuleFor<TProperty>(Expression<Func<TData, TProperty>> property, Func<Faker, TProperty> setter);
          IGenerator RuleFor<TProperty>(Expression<Func<TData, TProperty>> property, Func<Faker, TData, TProperty> setter);

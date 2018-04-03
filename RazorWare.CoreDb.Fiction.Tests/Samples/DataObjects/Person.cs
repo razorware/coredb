@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Linq;
-
-using Bogus;
-using Bogus.DataSets;
 
 namespace RazorWare.CoreDb.Fiction.DataObjects {
    public enum Gender {
@@ -12,8 +8,6 @@ namespace RazorWare.CoreDb.Fiction.DataObjects {
    }
 
    public class Person {
-      private int personId = 0;
-
       public int Id { get; set; }
       public DateTime Birthdate { get; set; }
       public Gender Gender { get; set; }
@@ -38,6 +32,10 @@ namespace RazorWare.CoreDb.Fiction.DataObjects {
 
       public override int GetHashCode( ) {
          return Id;
+      }
+
+      public override string ToString( ) {
+         return $"{Surname}, {Forename} {(string.IsNullOrEmpty(Segname) ? string.Empty : $"{Segname[0]}.")}";
       }
    }
 }

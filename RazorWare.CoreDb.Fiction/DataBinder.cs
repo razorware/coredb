@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using RazorWare.CoreDb.Interfaces;
 
 namespace RazorWare.CoreDb.Fiction {
-   public class DataBinder<TBinder> {
+   public class DataBinder {
       private readonly Dictionary<Type, IDataGenerator> generators = new Dictionary<Type, IDataGenerator>();
-
+      private readonly IRepository repo;
       private readonly string name;
 
       public string Name => name;
 
-      public DataBinder(string binderName = null) {
-         name = binderName ?? typeof(TBinder).Name;
+      public DataBinder(IRepository dataRepo=null, string binderName=null) {
+         name = binderName;
+         repo = dataRepo;
       }
 
       public DataGenerator<TData> AddGenerator<TData>( ) where TData : class {
          var type = typeof(TData);
 
          if (!generators.TryGetValue(type, out IDataGenerator generator)) {
-            generators[type] = generator = DataGenerator<TData>.Create();
+            generators[type] = generator = DataGenerator<TData>.Create(this);
          }
 
          return new DataGenerator<TData>((DataGenerator<TData>.IGenerator)generator);
@@ -32,6 +34,20 @@ namespace RazorWare.CoreDb.Fiction {
          }
 
          return ((DataGenerator<TData>.IGenerator)generator).Generate();
+      }
+
+      public Func<TData> Cache<TData>(Func<TData> generate) where TData : class {
+         if (repo == null) {
+            throw new InvalidOperationException("Cannot cache generator objects without a repository");
+         }
+
+         if (!generators.ContainsKey(typeof(TData))) {
+            AddGenerator<TData>();
+         }
+
+         return ( ) => {
+            return repo.Add(generate());
+         };
       }
    }
 }
