@@ -1,21 +1,11 @@
-# coredb
-A foray into finding out what it takes to make a database. Unabashedly different with a new take on a query language.
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
-## StorageEngine
-The first part to research is the storage engine. Studies of MySQL have multiple storage engines - MyISAM, Federated and InnoDB. SQL Server has a very complex system that minimizes the number of files created.
+using RazorWare.CoreDb.Fiction;
+using RazorWare.CoreDb.Interfaces;
 
-My initial thought had been a primary file with database information. Databases might be organized by directory so that a 'Customers' database would exist under a 'Customers' directory. Several files may exist 
-such as a database schema, table files, indexes, etc. The exact nature and organization of the file system is yet undetermined. I am looking to design a hybrid between the MySQL default _file per table_ and the 
-default SQL Server _all in one_ architectures.
-
-Requirements:
-* Data generation tools to create tons of data.  
-  Looking into: https://github.com/bchavez/Bogus
-
-  Bogus is actually pretty cool. So I designed the `Fiction` project to have a database feel to it. It will act just like a data store.
-
-The `CustomersDataGenerator` class lets me create a data container like a database:  
-``` c#
+namespace RazorWare.DbFake.ClientDatabase {
    public class CustomersDataGenerator {
       private static readonly List<(string num, string str)> aptAddress = new List<(string num, string str)>();
 
@@ -147,20 +137,4 @@ The `CustomersDataGenerator` class lets me create a data container like a databa
          return (Gender)gInt;
       }
    }
-```
-
-Usage (see unit test):
-``` c#
-   var generator = new CustomersDataGenerator(new Repository());
-   var customers = generator.Customers;
-
-   // generate 1000 customers (Persons)
-   for (var i = 0; i < 1000; i++) {
-      generator.Generate<Person>();
-   }
-```
-
-The above will generate 1000 Person objects with all the rules fulfilled in the `CustomersDataGenerator`. Because the rules are amended with either `Cache()` or `Unique(keyProperty)`, generated 
-results are automatically inserted into the `Customer.IRepository`.
-
-NOTE: ...now I have to wonder if there is a way to use an ORM configuration to generate relational pseudo-tables with generated data.
+}

@@ -21,8 +21,13 @@ namespace RazorWare.CoreDb.Fiction {
       }
 
       private static bool TryGet<TData, TProperty>(this IEnumerable<TData> source, TProperty property, Func<TData, TProperty> qualifier, out TData data) where TData : class {
-         data = source.FirstOrDefault(i => qualifier(i).Equals(property));
-         
+         if (source == null) {
+            data = null;
+         }
+         else {
+            data = source.FirstOrDefault(i => qualifier(i).Equals(property));
+         }
+
          return data != default(TData);
       }
    }

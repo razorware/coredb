@@ -9,11 +9,11 @@ namespace RazorWare.CoreDb.Fiction {
       private readonly Dictionary<Type, ICollection> cache = new Dictionary<Type, ICollection>();
 
       public TData Add<TData>(TData data) {
-         if (!TryGetCache(out List<TData> cache)) {
-            return default(TData);
+         if (!TryGetCache(out List<TData> collection)) {
+            cache[typeof(TData)] = collection = new List<TData>();
          }
 
-         cache.Add(data);
+         collection.Add(data);
 
          return data;
       }
