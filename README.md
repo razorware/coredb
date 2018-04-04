@@ -10,6 +10,12 @@ default SQL Server _all in one_ architectures.
 
 Requirements:
 * Data generation tools to create tons of data.  
+* Directory structure
+* File architecture
+
+# Data Generation  
+This was a fun walk through fake data generation. Here is the short journal of discovery:
+
   Looking into: https://github.com/bchavez/Bogus
 
   Bogus is actually pretty cool. So I designed the `Fiction` project to have a database feel to it. It will act just like a data store.
@@ -163,4 +169,12 @@ Usage (see unit test):
 The above will generate 1000 Person objects with all the rules fulfilled in the `CustomersDataGenerator`. Because the rules are amended with either `Cache()` or `Unique(keyProperty)`, generated 
 results are automatically inserted into the `Customer.IRepository`.
 
-NOTE: ...now I have to wonder if there is a way to use an ORM configuration to generate relational pseudo-tables with generated data.
+NOTE: ...now I have to wonder if there is a way to use an ORM configuration to generate relational pseudo-tables with generated data. _But this is a problem for another time._  
+
+# Directory Structure  
+Structuring the directories and placement of files is simple. Studying several options I am going with this approach:
+<p align="center">
+    <img src="https://github.com/razorware/coredb/blob/master/images/directory_structure.png"
+         alt="directory structure"
+         title="CoreDB Directory Structure" />
+</p>
