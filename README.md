@@ -21,4 +21,4 @@ Structuring the directories and placement of files is simple. Studying several o
          title="CoreDB Directory Structure" />
 </p>
 
-[Data generation]: https://github.com/razorware/coredb/master/documentation/FakeData.md
+[Data generation]: https://github.com/razorware/coredb/blob/master/documentation/FakeData.md
