@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Document
 		documentation\FakeData.md = documentation\FakeData.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.CoreDb.StorageEngine.Testing", "RazorWare.CoreDb.StorageEngine.Testing\RazorWare.CoreDb.StorageEngine.Testing.csproj", "{D779F92C-E75A-4B08-A99C-6ECC34763586}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{9E154611-6054-4653-9307-353FAC56B56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E154611-6054-4653-9307-353FAC56B56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E154611-6054-4653-9307-353FAC56B56F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D779F92C-E75A-4B08-A99C-6ECC34763586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D779F92C-E75A-4B08-A99C-6ECC34763586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D779F92C-E75A-4B08-A99C-6ECC34763586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D779F92C-E75A-4B08-A99C-6ECC34763586}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
