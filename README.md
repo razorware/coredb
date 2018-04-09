@@ -26,11 +26,13 @@ Structuring the directories and placement of files seems simple. Studying severa
 
 ## File Architecture  
 In the proposed directory structure, there are a minimum of 2 files:
-* .db 
+* .db (128 bytes ???)
    * describes the file structure (file-per-table or master-file)
    * file and page specifications
       * page size
       * number of pages per file
+   * date saved
+   * date modified
    * table schemas
    * other database information - security, permissions, access, roles, etc. - as determined
 * .dat
