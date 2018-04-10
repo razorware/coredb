@@ -41,9 +41,9 @@ In the proposed directory structure, there are a minimum of 2 files:
          </td>
       </tr>
    </table>
-</p>
-* .db
-   * header (currently 128 bytes)
+</p>  
+* .db  
+   * header (currently 128 bytes)  
       * status
       * describes the file structure (file-per-table or master-file)
       * date saved
