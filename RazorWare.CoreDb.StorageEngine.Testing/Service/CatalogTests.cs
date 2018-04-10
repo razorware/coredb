@@ -78,5 +78,7 @@ namespace RazorWare.CoreDb.StorageEngine.Testing {
 
          Assert.AreEqual(expStatus, catalog.Status);
       }
+
+
    }
 }

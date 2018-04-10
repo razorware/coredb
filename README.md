@@ -35,6 +35,12 @@ In the proposed directory structure, there are a minimum of 2 files:
    * date modified
    * table schemas
    * other database information - security, permissions, access, roles, etc. - as determined
+<p align="center">
+    <img src="https://github.com/razorware/coredb/blob/master/images/database_file_format.png"
+         alt=".db file structure"
+         title="Database .db File Structure" />
+</p>
+
 * .dat
    * table data
    * table indexes
