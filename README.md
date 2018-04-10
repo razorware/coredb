@@ -27,14 +27,19 @@ Structuring the directories and placement of files seems simple. Studying severa
 ## File Architecture  
 In the proposed directory structure, there are a minimum of 2 files:
 <p align="center">
-   <table>
+   <table align="center">
       <tr>
          <td>
             <img src="https://github.com/razorware/coredb/blob/master/images/database_file_format.png"
                  alt=".db file structure"
                  title="Database .db File Structure" />
          </td>
-         <td>50</td>
+         <td>
+            .dat file structre
+            <br>
+            <br>
+            image to be created and inserted
+         </td>
       </tr>
    </table>
 </p>
