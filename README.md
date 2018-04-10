@@ -42,6 +42,7 @@ In the proposed directory structure, there are a minimum of 2 files:
       </tr>
    </table>
 </p>  
+
 * .db  
    * header (currently 128 bytes)  
       * status
