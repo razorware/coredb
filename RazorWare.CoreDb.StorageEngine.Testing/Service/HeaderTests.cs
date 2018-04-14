@@ -1,14 +1,17 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using static RazorWare.CoreDb.StorageEngine.Testing.TestHelpers;
 
 using static RazorWare.CoreDb.StorageEngine.StorageConstants;
 
 namespace RazorWare.CoreDb.StorageEngine.Testing {
    [TestClass]
    public class HeaderTests {
-
       [TestMethod]
       public void ConstructHeader( ) {
          var header = new Header();
@@ -28,8 +31,7 @@ namespace RazorWare.CoreDb.StorageEngine.Testing {
 
          Assert.AreEqual(expStatus, header.Status);
          Assert.AreEqual(CatalogFormat.FilePerSource, header.Format);
-         Assert.AreEqual(PageSize, header.PageSize);
-         Assert.AreEqual(PageCount, header.PageCount);
+         Assert.AreEqual(DbPageCount, header.PageCount);
          Assert.IsTrue(header.Length < MaxHeaderSize);
       }
 
@@ -80,24 +82,33 @@ namespace RazorWare.CoreDb.StorageEngine.Testing {
             Assert.AreEqual(binReader.ReadInt64(), binReader.ReadInt64());
             Assert.AreEqual(expStatus, (CatalogStatus)binReader.ReadByte());
             Assert.AreEqual(expFormat, (CatalogFormat)binReader.ReadByte());
-            Assert.AreEqual(PageSize, binReader.ReadInt32());
-            Assert.AreEqual(PageCount, binReader.ReadInt32());
+            Assert.AreEqual(DbPageCount, binReader.ReadInt32());
          }
       }
 
-      private Stream BuilderHeaderBuffer(CatalogStatus status, CatalogFormat format, DateTime update, DateTime persist) {
-         var memStream = new MemoryStream(new byte[MaxHeaderSize]);
-
-         using (var binWriter = new BinaryWriter(memStream, Encoding, true)) {
-            binWriter.Write(update.Ticks);
-            binWriter.Write(persist.Ticks);
-            binWriter.Write((byte)status);
-            binWriter.Write((byte)format);
-            binWriter.Write(PageSize);
-            binWriter.Write(PageCount);
+      [TestMethod]
+      public void HeaderReadPageContent( ) {
+         var pages = new List<Page>() {
+            new Page(PageType.Master)
+         };
+         // add the rest of the default pages
+         while(pages.Count < DbPageCount) {
+            pages.Add(new Page());
          }
+         var persist = DateTime.UtcNow;
+         var status = CatalogStatus.New | CatalogStatus.Open;
+         var format = CatalogFormat.MasterSourceFile;
+         var update = persist + new TimeSpan(0, 5, 38);
+         var stream = BuilderHeaderBuffer(status, format, update, persist, pages.ToArray());
 
-         return memStream;
+         var expPageContent = pages
+            .Select(p => p.Type)
+            .ToList();
+
+         var header = new Header();
+         header.Read(stream);
+
+         CollectionAssert.AreEqual(expPageContent, header.PageContent.ToList());
       }
    }
 }

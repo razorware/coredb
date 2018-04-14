@@ -18,14 +18,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fiction Data Source", "Fict
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorWare.CoreDb.Fiction.Testing", "RazorWare.CoreDb.Fiction.Tests\RazorWare.CoreDb.Fiction.Testing.csproj", "{A00432DA-04F8-4FD9-8DEE-5811875A6ECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.DbFake.ClientDatabase", "RazorWare.DbFake.ClientDatabase\RazorWare.DbFake.ClientDatabase.csproj", "{9E154611-6054-4653-9307-353FAC56B56F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorWare.DbFake.ClientDatabase", "RazorWare.DbFake.ClientDatabase\RazorWare.DbFake.ClientDatabase.csproj", "{9E154611-6054-4653-9307-353FAC56B56F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{9546F121-A255-4DA1-819B-A49AE040D7C3}"
 	ProjectSection(SolutionItems) = preProject
 		documentation\FakeData.md = documentation\FakeData.md
+		FileStructre.md = FileStructre.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWare.CoreDb.StorageEngine.Testing", "RazorWare.CoreDb.StorageEngine.Testing\RazorWare.CoreDb.StorageEngine.Testing.csproj", "{D779F92C-E75A-4B08-A99C-6ECC34763586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorWare.CoreDb.StorageEngine.Testing", "RazorWare.CoreDb.StorageEngine.Testing\RazorWare.CoreDb.StorageEngine.Testing.csproj", "{D779F92C-E75A-4B08-A99C-6ECC34763586}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

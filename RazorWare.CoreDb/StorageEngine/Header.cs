@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
 using RazorWare.Reflection;
@@ -10,7 +11,6 @@ namespace RazorWare.CoreDb.StorageEngine {
    internal class Header {
       private readonly int maxSize;
       private CatalogFormat format;
-      private int pageSize;
       private int pageCount;
       private DateTime updateTS;
       private DateTime persistTS;
@@ -18,9 +18,9 @@ namespace RazorWare.CoreDb.StorageEngine {
       public int MaxSize => maxSize;
       public CatalogStatus Status { get; internal set; }
       public CatalogFormat Format => format;
-      public int PageSize => pageSize;
       public int PageCount => pageCount;
       public int Length => CalculateLength();
+      public IEnumerable<PageType> PageContent { get; private set; }
 
       internal Header( ) {
          maxSize = MaxHeaderSize;
@@ -34,8 +34,16 @@ namespace RazorWare.CoreDb.StorageEngine {
             persistTS = new DateTime(binReader.ReadInt64());
             Status = (CatalogStatus)binReader.ReadByte();
             format = (CatalogFormat)binReader.ReadByte();
-            pageSize = binReader.ReadInt32();
             pageCount = binReader.ReadInt32();
+
+            if (pageCount > 0) {
+               binReader.BaseStream.Seek(-pageCount, SeekOrigin.End);
+               // reading in reverse order
+               var revContent = binReader.ReadBytes(pageCount);
+               PageContent = revContent
+                  .Reverse()
+                  .Select(b => (PageType)b);
+            }
          }
 
          if (updateTS > persistTS) {
@@ -56,7 +64,6 @@ namespace RazorWare.CoreDb.StorageEngine {
             binWriter.Write(persistTS.Ticks);
             binWriter.Write((byte)Status);
             binWriter.Write((byte)format);
-            binWriter.Write(pageSize);
             binWriter.Write(pageCount);
          }
       }
@@ -90,10 +97,10 @@ namespace RazorWare.CoreDb.StorageEngine {
          ++length;
          // format (byte)
          ++length;
-         // pageSize (Int32)
-         length += Type.GetTypeCode(typeof(Int32)).Size();
          // pageCount (Int32)
          length += Type.GetTypeCode(typeof(Int32)).Size();
+         // pageContent (Int32)
+         length += pageCount;
 
          return length;
       }

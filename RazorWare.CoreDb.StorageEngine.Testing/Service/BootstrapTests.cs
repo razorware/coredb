@@ -55,7 +55,7 @@ namespace RazorWare.CoreDb.StorageEngine.Testing {
       [TestMethod]
       public void CreateCatalog( ) {
          var expName = "master";
-         var expStatus = CatalogStatus.New | CatalogStatus.Open;
+         var expStatus = CatalogStatus.New | CatalogStatus.Open | CatalogStatus.Dirty;
          var se = ServiceBootstrap.Default;
 
          ICatalog catalog = se.Create().Catalog(expName);

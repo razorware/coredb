@@ -26,44 +26,24 @@ Structuring the directories and placement of files seems simple. Studying severa
 
 ## File Architecture  
 In the proposed directory structure, there are a minimum of 2 files:
-<p align="center">
-   <table style="margin: 0px auto;">
-      <tr>
-         <td>
-            <img src="https://github.com/razorware/coredb/blob/master/images/database_file_format.png"
-                 alt=".db file structure"
-                 title="Database .db File Structure" />
-         </td>
-         <td align="center">
-            .dat file structure
-            <br>
-            image to be created
-         </td>
-      </tr>
-   </table>
-</p>  
+<table style="margin: 0px auto;">
+   <tr>
+      <td>
+         <img src="https://github.com/razorware/coredb/blob/master/images/database_file_format.png"
+               alt=".db file structure"
+               title="Database .db File Structure" />
+      </td>
+      <td align="center">
+         .dat file structure
+         <br>
+         image to be created
+      </td>
+   </tr>
+</table> 
 
-* .db  
-   * header (currently 128 bytes)  
-      * status
-      * describes the file structure (file-per-table or master-file)
-      * date saved
-      * date modified
-      * file and page specifications
-         * page size
-         * number of pages per file
-      * page indexing
-         * page type
-   * pages
-      * table schemas
-      * other database information - security, permissions, access, roles, etc. - as determined
-
-* .dat
-   * table data
-   * table indexes
-   * foreign keys
-   * other table specific information as determined
+More on [file structure here].
 
 
 
 [Data generation]: https://github.com/razorware/coredb/blob/master/documentation/FakeData.md
+[file structure here]: https://github.com/razorware/coredb/blob/master/documentation/FileStructure.md
