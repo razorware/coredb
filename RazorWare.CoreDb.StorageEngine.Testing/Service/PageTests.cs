@@ -1,6 +1,6 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 
-using static RazorWare.CoreDb.StorageEngine.Testing.TestHelpers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using static RazorWare.CoreDb.StorageEngine.StorageConstants;
 
@@ -22,6 +22,19 @@ namespace RazorWare.CoreDb.StorageEngine.Testing {
          var page = new Page(PageType.Master);
 
          Assert.AreEqual(expPageSize, page.MaxSize);
+      }
+
+      [TestMethod]
+      public void PageLoadFromStream( ) {
+         var buffer = new byte[MaxHeaderSize + MasterPage];
+         var stream = new MemoryStream(buffer);
+         stream.Seek(MaxHeaderSize, SeekOrigin.Begin);
+
+         var page = new Page(PageType.Master);
+         page.Load(stream);
+
+         Assert.AreEqual(stream.Length, stream.Position);
+         Assert.AreEqual(MaxHeaderSize, page.Location);
       }
    }
 }

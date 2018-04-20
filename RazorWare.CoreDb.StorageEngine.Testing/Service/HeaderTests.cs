@@ -31,7 +31,7 @@ namespace RazorWare.CoreDb.StorageEngine.Testing {
 
          Assert.AreEqual(expStatus, header.Status);
          Assert.AreEqual(CatalogFormat.FilePerSource, header.Format);
-         Assert.AreEqual(DbPageCount, header.PageCount);
+         Assert.AreEqual(0, header.PageCount);
          Assert.IsTrue(header.Length < MaxHeaderSize);
       }
 
@@ -82,23 +82,20 @@ namespace RazorWare.CoreDb.StorageEngine.Testing {
             Assert.AreEqual(binReader.ReadInt64(), binReader.ReadInt64());
             Assert.AreEqual(expStatus, (CatalogStatus)binReader.ReadByte());
             Assert.AreEqual(expFormat, (CatalogFormat)binReader.ReadByte());
-            Assert.AreEqual(DbPageCount, binReader.ReadInt32());
+            Assert.AreEqual(0, binReader.ReadInt32());
          }
       }
 
       [TestMethod]
       public void HeaderReadPageContent( ) {
          var pages = new List<Page>() {
-            new Page(PageType.Master)
+            new Page(PageType.Master), new Page(PageType.Schema), new Page(PageType.Schema),
+            new Page(), new Page(PageType.Index), new Page(PageType.Index)
          };
-         // add the rest of the default pages
-         while(pages.Count < DbPageCount) {
-            pages.Add(new Page());
-         }
          var persist = DateTime.UtcNow;
+         var update = persist + new TimeSpan(0, 5, 38);
          var status = CatalogStatus.New | CatalogStatus.Open;
          var format = CatalogFormat.MasterSourceFile;
-         var update = persist + new TimeSpan(0, 5, 38);
          var stream = BuilderHeaderBuffer(status, format, update, persist, pages.ToArray());
 
          var expPageContent = pages

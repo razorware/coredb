@@ -4,20 +4,19 @@ using System.Linq;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using static RazorWare.CoreDb.StorageEngine.StorageConstants;
+using static RazorWare.CoreDb.StorageEngine.Testing.TestHelpers;
 
 namespace RazorWare.CoreDb.StorageEngine.Testing {
    [TestClass]
    public class CatalogCollectionTests {
-      private readonly DirectoryInfo dataDir = new DirectoryInfo(@".\Data");
 
       [TestInitialize]
       public void InitializeTest( ) {
-         if (!dataDir.Exists) {
-            dataDir.Create();
+         if (!DataDirectory.Exists) {
+            DataDirectory.Create();
          }
          else {
-            foreach (var d in dataDir.GetDirectories()) {
+            foreach (var d in DataDirectory.GetDirectories()) {
                d.Delete(true);
             }
          }
@@ -27,10 +26,10 @@ namespace RazorWare.CoreDb.StorageEngine.Testing {
 
       [TestCleanup]
       public void CleanupTest( ) {
-         if (dataDir.Exists) {
+         if (DataDirectory.Exists) {
             // move to TestResult-{TimeStamp}
-            var testPath = Path.Combine(dataDir.Parent.FullName, $"DataTests_{DateTime.Now.ToString("MMM_dd_HH_mm_ss_ffff")}");
-            Directory.Move(dataDir.FullName, testPath);
+            var testPath = Path.Combine(DataDirectory.Parent.FullName, $"DataTests_{DateTime.Now.ToString("MMM_dd_HH_mm_ss_ffff")}");
+            Directory.Move(DataDirectory.FullName, testPath);
          }
       }
 

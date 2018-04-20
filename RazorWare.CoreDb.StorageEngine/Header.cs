@@ -26,6 +26,13 @@ namespace RazorWare.CoreDb.StorageEngine {
          maxSize = MaxHeaderSize;
       }
 
+      internal static Header FromStream(Stream stream) {
+         var header = new Header();
+         header.Read(stream);
+
+         return header;
+      }
+
       internal void Read(Stream stream) {
          stream.Seek(0, SeekOrigin.Begin);
 

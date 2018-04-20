@@ -23,6 +23,7 @@ namespace RazorWare.CoreDb.StorageEngine {
          New = 1,
          Open = 2,
          Dirty = 4,
+         Closed = 8,
       }
 
       public enum PageType {
